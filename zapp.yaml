@@ -1,0 +1,34 @@
+---
+name: "Genapp"
+description: "ZAPP file for the Genapp application"
+version: "3.0.0"
+author:
+  name: "IBM CORPORATION"
+profiles:
+- name: "dbb-build"
+  type: "dbb"
+  settings:
+    application: "Genapp"
+    command: "$DBB_HOME/bin/groovyz"
+    buildScriptPath: "\e1/u/DMJTA1/testMM/dbb-zappbuild"
+    buildScriptArgs:
+    - "--userBuild"
+    - "--workspace ${zopeneditor.userbuild.userSettings.dbbWorkspace}"
+    - "--application ${application}"
+    - "--hlq ${zopeneditor.userbuild.userSettings.dbbHlq}"
+    - "--outDir ${zopeneditor.userbuild.userSettings.dbbLogDir}"
+    - "--verbose"
+    - "--propFiles /var/dbb/dbb-zappbuild-config/build.properties,/var/dbb/dbb-zappbuild-config/datasets.properties"
+    additionalDependencies:
+    - "${application}/application-conf"
+    logFilePatterns:
+    - "${buildFile.basename}.log"
+    - "BuildReport.*"
+propertyGroups:
+- name: "copy"
+  language: "COBOL"
+  libraries:
+  - name: "syslib"
+    type: "local"
+    locations:
+    - "Genapp/src/copy"
