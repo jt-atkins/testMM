@@ -17,7 +17,7 @@
       *                                                                *
       * Select customer details from DB2 table                         *
       *                                                                *
-      * TEST: 033                                                      *
+      * TEST: 034                                                      *
       *                                                                *
       ******************************************************************
        IDENTIFICATION DIVISION.
