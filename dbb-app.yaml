@@ -38,7 +38,7 @@ application:
           forFiles: "**/cobol/epsnbrvl.cbl"
           # Update the dependency search path for the folder structure
         - name: dependencySearchPath
-          value: search:${WORKSPACE}/?path=${APP_DIR_NAME}/src/copy/*.cpy
+          value: search:${WORKSPACE}/?path=${APP_DIR_NAME}/Genapp/src/copy/*.cpy
 
         # Skip creating a load module for these programs as they will be 
         # statically linked to other programs
