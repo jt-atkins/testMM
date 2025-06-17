@@ -97,12 +97,12 @@ jobs:
               path: ${{ runner.temp }}/deploy-logs                        # Path to build logs artifacts
               retention-days: 1
 
-    Cleanup:
-        needs:
-            - Deploy-integration
-        runs-on: self-hosted
-        if: always()
-        steps:
-            - name: Cleanup Build Environment
-              run: ssh ${{ env.zosSFTPUser}} ". ./.profile && deleteWorkspace.sh -w ${{ env.uniqueWorkspaceId }}"
+ #   Cleanup:
+ #       needs:
+ #           - Deploy-integration
+ #       runs-on: self-hosted
+ #       if: always()
+ #       steps:
+ #           - name: Cleanup Build Environment
+ #             run: ssh ${{ env.zosSFTPUser}} ". ./.profile && deleteWorkspace.sh -w ${{ env.uniqueWorkspaceId }}"
             
