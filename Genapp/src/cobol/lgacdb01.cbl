@@ -16,7 +16,7 @@
       *   To add customer's name, address and date of birth to the     *
       *  DB2 customer table creating a new customer entry.             *
       *                                                                *
-      *  @c3           FAST START 2020 v8                            *
+      *  @c3           FAST START 2020 v9                            *
       ******************************************************************
 
        IDENTIFICATION DIVISION.
