@@ -39,7 +39,8 @@ jobs:
             echo "zosSFTPUser                        = ${{ env.zosSFTPUser}}"
          - name: Clone Repo to z/OS Unix System Services
            run: ssh ${{ env.zosSFTPUser}} ". ./.profile && gitClone.sh -w ${{ env.uniqueWorkspaceId }} -r https://${{ secrets.githubAccessToken }}@github.com/${{ github.repository }}.git -b ${{ env.branch }}" 
-
+           
+           
     Build:
         needs: Setup
         runs-on: self-hosted
@@ -54,6 +55,7 @@ jobs:
                 mkdir "${{ runner.temp }}/build-logs" 
                 sftp ${{ env.zosSFTPUser}}:${{ env.uniqueWorkspaceId }}/*.tar "\"${{ runner.temp }}/build-logs\""
                 tar -xvf "${{ runner.temp }}/build-logs/logs.tar" -C "${{ runner.temp }}/build-logs"
+            shell: cmd
 
           - name: Upload build logs
             uses: actions/upload-artifact@v4
