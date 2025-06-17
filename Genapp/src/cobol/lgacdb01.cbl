@@ -2,7 +2,7 @@
       *                                                                *
       * "RESTRICTED MATERIALS OF IBM".                                 *
       *                                                                *
-      * CB12        test4.                                             *
+      * CB12        test5.                                             *
       *                                                                *
       * (C) COPYRIGHT IBM CORP. 2011, 2020 ALL RIGHTS RESERVED         *
       *                                                                *
