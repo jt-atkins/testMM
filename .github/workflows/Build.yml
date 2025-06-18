@@ -74,7 +74,8 @@ jobs:
         steps:
           - name: Package build outputs
             run: ssh ${{ env.zosSFTPUser}} ". ./.profile && packageBuildOutputs.sh -w ${{ env.uniqueWorkspaceId }} -t ${{ env.application }}.tar -a ${{ env.application }} -b ${{ env.branch }} -p ${{env.pipelineType}} -v ${{ env.packageName }} "
-
+            shell: cmd
+            
     Deploy-integration:
         needs: Package
         runs-on: self-hosted
@@ -82,23 +83,27 @@ jobs:
 
           - name: Generate deployment plan 
             run: ssh ${{ env.zosSFTPUser}} ". ./.profile && mkdir -p ${{ env.uniqueWorkspaceId }}/deployPkgDir/deploy-logs && wazideploy-generate.sh -w ${{ env.uniqueWorkspaceId }} -i ${{ env.application }}.tar -r deploy-logs/deployment-plan-report.html"
+            shell: cmd
             
           - name: Deploy to integration
             run: ssh ${{ env.zosSFTPUser}}  ". ./.profile && wazideploy-deploy.sh -w ${{ env.uniqueWorkspaceId }} -e EOLEB7-${{ env.application }}-Integration.yaml -i ${{ env.application }}.tar -l deploy-logs/evidences/evidence.yaml"
-          
+            shell: cmd
+            
           - name: Generate and publish deployment report for integration
             run: | 
                 ssh ${{ env.zosSFTPUser}} ". ./.profile && wazideploy-evidence.sh -w ${{ env.uniqueWorkspaceId }} -l deploy-logs/evidence.yaml -o deploy-logs/deployment-report.html"
                 rm -rf "${{ runner.temp }}/deploy-logs"
                 mkdir "${{ runner.temp }}/deploy-logs"
                 sftp -r ${{ env.zosSFTPUser}}:${{ env.uniqueWorkspaceId }}/deployPkgDir/deploy-logs/* "\"${{ runner.temp }}/deploy-logs\""
-          
+            shell: cmd
+            
           - name: Upload deploy logs
             uses: actions/upload-artifact@v4
             with:
               name: deploy_logs_${{github.run_number }}                        # Name used for artifact when it is uploaded
               path: ${{ runner.temp }}/deploy-logs                        # Path to build logs artifacts
               retention-days: 1
+              
 
  #   Cleanup:
  #       needs:
