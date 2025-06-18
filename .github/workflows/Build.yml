@@ -52,7 +52,7 @@ jobs:
             if: ${{ always() }}
             run: | 
                 ssh ${{ env.zosSFTPUser}} ". ./.profile && prepareLogs.sh -w ${{ env.uniqueWorkspaceId }}" 
-                rm -rf "${{ runner.temp }}/build-logs" 
+                rm -r fo "${{ runner.temp }}/build-logs" 
                 mkdir "${{ runner.temp }}/build-logs" 
                 sftp ${{ env.zosSFTPUser}}:${{ env.uniqueWorkspaceId }}/*.tar "\"${{ runner.temp }}/build-logs\""
                 tar -xvf "${{ runner.temp }}/build-logs/logs.tar" -C "${{ runner.temp }}/build-logs"
