@@ -58,6 +58,7 @@ jobs:
                 -exec sh -c 'iconv -f IBM-1047 -t UTF-8 "$1" > "$1.utf8"' _ {} \;
               for /R "%RUNNER_TEMP%\build-logs" %%f in (*.log) do (
                 iconv -f IBM-1047 -t UTF-8 "%%f" > "%%f.utf8"
+              )
             shell: cmd
 
           - name: Upload build logs
