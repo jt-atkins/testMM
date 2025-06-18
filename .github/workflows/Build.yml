@@ -51,14 +51,11 @@ jobs:
           - name: Prepare logs
             if: ${{ always() }}
             run: | 
-              ssh ${{ env.zosSFTPUser}} ". ./.profile && prepareLogs.sh -w ${{ env.uniqueWorkspaceId }}" 
-              rm -r fo "${{ runner.temp }}/build-logs" 
-              mkdir "${{ runner.temp }}/build-logs" 
-              find "${{ runner.temp }}/build-logs" -type f -name "*.log" \
-                -exec sh -c 'iconv -f IBM-1047 -t UTF-8 "$1" > "$1.utf8"' _ {} \;
-              for /R "%RUNNER_TEMP%\build-logs" %%f in (*.log) do (
-                iconv -f IBM-1047 -t UTF-8 "%%f" > "%%f.utf8"
-              )
+                ssh ${{env.zosSFTPUser}} ". ./.profile && prepareLogs.sh -w ${{ env.uniqueWorkspaceId }}"  
+                rm -r -fo "${{ runner.temp }}/build-logs" 
+                mkdir "${{ runner.temp }}/build-logs" 
+                sftp ${{env.zosSFTPUser}}:${{ env.uniqueWorkspaceId }}/*.tar "\"${{ runner.temp }}/build-logs\""
+                tar -xvf "${{ runner.temp }}/build-logs/logs.tar" -C "${{ runner.temp }}/build-logs"
             shell: cmd
 
           - name: Upload build logs
