@@ -28,9 +28,9 @@ env:
     branch : ${{ github.ref_name }} 
     application: ${{ github.event.repository.name }}
     azureArtifactName: "${{ github.repository }}.tar"    
-    zosHostname: lpar.dev.ibm.com
-    zosSFTPUser: GITHUB@lpar.dev.ibm.com
-    environment: ${{inputs.environmentName}}
+    zosHostname: WTSC47.CPOLAB.IBM.COM
+    zosSFTPUser: DMJTA1@WTSC47.CPOLAB.IBM.COM
+    environment: WTSC47
         
 jobs:
     Retrieve-package:
