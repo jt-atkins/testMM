@@ -204,7 +204,7 @@
                FROM CUSTOMER
                WHERE CUSTOMERNUMBER = :DB2-CUSTOMERNUMBER-INT
            END-EXEC.
-           MOVE '3' TO CA-DOB(1:1).
+     
 
            Evaluate SQLCODE
              When 0
